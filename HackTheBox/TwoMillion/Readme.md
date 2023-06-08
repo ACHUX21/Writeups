@@ -85,11 +85,11 @@ curl -s -X POST http://2million.htb/api/v1/invite/generate | jq .data.code -r |b
 
 </br>
 
-After logging in with the provided invite code, I will attempt to brute force certain endpoints to obtain more valuable information and enhance our capabilities.
+Upon logging in with the provided invite code, I have started exploring additional API resources to discover more useful functionalities.
 
 
 ```bash
- curl -s http://2million.htb/api/v1 -H "Cookie: PHPSESSID=b0akpjn8hlj8h2085dv674tgkv" |jq .
+curl -s http://2million.htb/api/v1 -H "Cookie: PHPSESSID=b0akpjn8hlj8h2085dv674tgkv" |jq .
 {
   "v1": {
     "user": {
@@ -124,7 +124,25 @@ After logging in with the provided invite code, I will attempt to brute force ce
 
 ```
 
+</br>
 
+I will attempt to update my settings
+
+</br>
+
+```json
+"PUT": {
+         "/api/v1/admin/settings/update": "Update user settings"
+      }
+```
+
+</br>
+
+<a href="https://app.hackthebox.com/machines/TwoMillion">
+  <img src="pic8.png" alt="Alt Text">
+</a>
+
+## Having a RCE
 
 
 
