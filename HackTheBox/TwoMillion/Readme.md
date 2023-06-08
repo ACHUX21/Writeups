@@ -162,7 +162,7 @@ Now that we have administrative access, we can examine :
       },
 ```
 
-It seems that after spending some time searching, I have discovered a Remote Code Execution (RCE) vulnerability in the username parameter. This is a significant finding as it allows you to inject commands and potentially gain unauthorized access.
+It seems that after spending some time searching, I have discovered a vulnerability in the username parameter. This is a significant finding as it allows you to inject commands and potentially gain unauthorized access.
 
 `/api/v1/admin/vpn/generate`
 
