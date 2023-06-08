@@ -6,6 +6,7 @@
 </br>
 </br>
 </br>
+
 ## Nmap-scan
 </br>
 
@@ -17,11 +18,12 @@ First, let's initiate a quick scan utilizing nmap.
 </a>
 </br>
 
-It appears that we need to include "2million.htb" in our hosts file
+We need to include "2million.htb" in our /etc/hosts file
 
 ```bash
 echo "10.10.11.221 2million.htb" >> /etc/hosts
 ```
+
 </br>
 
 ## Trying to have access
