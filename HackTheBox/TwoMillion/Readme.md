@@ -88,6 +88,7 @@ curl -s -X POST http://2million.htb/api/v1/invite/generate | jq .data.code -r |b
 </br>
 
 Upon logging in with the provided invite code, I have started exploring additional API resources to discover more useful functionalities.
+Fortunately, I have come across some intriguing findings that piqued my interest. "/api/v1"
 
 
 ```bash
