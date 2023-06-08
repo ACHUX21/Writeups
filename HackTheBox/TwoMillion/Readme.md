@@ -182,6 +182,7 @@ Congratulations! HAHA
 ## Privilege 
 
 After logging in, I discovered an interesting file named ".env".
+(A .env file is typically used to store sensitive information)
 
  ```bash
  
