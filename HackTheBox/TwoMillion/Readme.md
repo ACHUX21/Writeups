@@ -146,7 +146,7 @@ I will attempt to update my settings
 </a>
 
 
-Great! Now that we have successfully obtained administrative privileges, we can proceed to gain RCE.
+Great!
 
 ## Having a RCE
 
