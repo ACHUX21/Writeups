@@ -1,8 +1,9 @@
+
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=35&pause=1000&color=6A0DAD&width=435&lines=Cat+Pictures+2)](https://git.io/typing-svg)
 
 </br>
 
-![Challenge Description](catpic2.png)
+![catpic2](https://github.com/ACHUX21/Writeups/assets/130113878/ccc85a50-860e-4206-afe2-b88c0614a7a6)
 
 # Enumeration
 ##
